@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FormControlName } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AdminAuthGuard } from './services/admin-guard.service';
 import { AuthGaurd } from './services/authguard.service';
 
 const routes: Routes = [
@@ -51,21 +55,31 @@ const routes: Routes = [
     loadChildren: () =>
       import('./my-orders/my-orders.module').then((m) => m.MyOrdersModule),
   },
-
-  // admin
   {
-    path: 'admin-orders',
+    path: 'admin/orders',
     loadChildren: () =>
       import('./admin/admin-orders/admin-orders.module').then(
         (m) => m.AdminOrdersModule
       ),
+    canActivate: [AuthGaurd, AdminAuthGuard],
   },
   {
-    path: 'admin-products',
+    path: 'admin/products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGaurd, AdminAuthGuard],
+  },
+  {
+    path: 'admin/products/new-product',
     loadChildren: () =>
-      import('./admin/admin-products/admin-products.module').then(
-        (m) => m.AdminProductsModule
+      import('./admin/product-form/product-form.module').then(
+        (m) => m.ProductFormModule
       ),
+    canActivate: [AuthGaurd, AdminAuthGuard],
+  },
+
+  {
+    path: '**',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
 ];
 

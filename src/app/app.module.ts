@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGaurd } from './services/authguard.service';
+import { AdminAuthGuard } from './services/admin-guard.service';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -21,7 +22,7 @@ import { AuthGaurd } from './services/authguard.service';
     AngularFireAuthModule,
     NgbModule,
   ],
-  providers: [AuthGaurd],
+  providers: [AuthGaurd, AdminAuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
