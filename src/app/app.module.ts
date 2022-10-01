@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGaurd } from './services/authguard.service';
 import { AdminAuthGuard } from './services/admin-guard.service';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -21,6 +22,7 @@ import { AdminAuthGuard } from './services/admin-guard.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
+    CustomFormsModule,
   ],
   providers: [AuthGaurd, AdminAuthGuard],
   bootstrap: [AppComponent],
