@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppUser } from '../models/appuser';
 import { AuthService } from '../services/auth.service';
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent {
   appUser$: AppUser | undefined;
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private route: Router) {
     this.authService.appUser$.subscribe((appUser) => {
       this.appUser$ = appUser;
       console.log(appUser);

@@ -12,10 +12,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGaurd } from './services/authguard.service';
 import { AdminAuthGuard } from './services/admin-guard.service';
 import { CustomFormsModule } from 'ng2-validation';
+import { CommonModule } from '@angular/common';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
   imports: [
+    DataTablesModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -23,6 +26,7 @@ import { CustomFormsModule } from 'ng2-validation';
     AngularFireAuthModule,
     NgbModule,
     CustomFormsModule,
+    CommonModule,
   ],
   providers: [AuthGaurd, AdminAuthGuard],
   bootstrap: [AppComponent],

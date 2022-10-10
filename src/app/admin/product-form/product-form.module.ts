@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ProductFormRoutingModule } from './product-form-routing.module';
 import { ProductFormComponent } from './product-form.component';
 import { FormsModule } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
 
 @NgModule({
   declarations: [ProductFormComponent],

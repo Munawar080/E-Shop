@@ -1,7 +1,33 @@
-<button
-  class="btn btn-primary"
-  routerLink="/admin/products/new-product"
-  (click)="navigate()"
+<button class="btn btn-primary" (click)="navigate()">New Product</button>
+<div class="input-group mb-3">
+  <input
+    #input
+    (keyup)="filter(input.value)"
+    type="text"
+    class="form-control"
+    placeholder="search..."
+  />
+</div>
+<table
+  class="table row-border hover"
+  datatable
+  [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger"
 >
-  New Product
-</button>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of filteredProducts">
+      <td>{{ p.payload.title }}</td>
+      <td>{{ p.payload.price | currency }}</td>
+      <td>
+        <a [routerLink]="['/admin/products/new-product/', p.key]">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

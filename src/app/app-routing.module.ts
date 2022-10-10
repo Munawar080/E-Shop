@@ -63,16 +63,28 @@ const routes: Routes = [
       ),
     canActivate: [AuthGaurd, AdminAuthGuard],
   },
-  {
-    path: 'admin/products',
-    component: AdminProductsComponent,
-    canActivate: [AuthGaurd, AdminAuthGuard],
-  },
+
   {
     path: 'admin/products/new-product',
     loadChildren: () =>
       import('./admin/product-form/product-form.module').then(
         (m) => m.ProductFormModule
+      ),
+    canActivate: [AuthGaurd, AdminAuthGuard],
+  },
+  {
+    path: 'admin/products/new-product/:id',
+    loadChildren: () =>
+      import('./admin/product-form/product-form.module').then(
+        (m) => m.ProductFormModule
+      ),
+    canActivate: [AuthGaurd, AdminAuthGuard],
+  },
+  {
+    path: 'admin/products',
+    loadChildren: () =>
+      import('./admin/admin-products/admin-products.module').then(
+        (m) => m.AdminProductsModule
       ),
     canActivate: [AuthGaurd, AdminAuthGuard],
   },

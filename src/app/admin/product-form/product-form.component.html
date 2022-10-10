@@ -6,7 +6,7 @@
         <label for="title">Title</label>
         <input
           #title="ngModel"
-          ngModel
+          [(ngModel)]="product.title"
           name="title"
           id="title"
           type="text"
@@ -28,7 +28,7 @@
           </div>
           <input
             #price="ngModel"
-            ngModel
+            [(ngModel)]="product.price"
             name="price"
             id="price"
             type="number"
@@ -51,7 +51,7 @@
         <label for="category">Category</label>
         <select
           #category="ngModel"
-          ngModel
+          [(ngModel)]="product.category"
           name="category"
           id="category"
           class="form-control"
@@ -73,7 +73,7 @@
         <label for="imageUrl">Image URL</label>
         <input
           #imageUrl="ngModel"
-          ngModel
+          [(ngModel)]="product.imageUrl"
           name="imageUrl"
           id="imageUrl"
           type="text"
@@ -90,6 +90,9 @@
         </div>
       </div>
       <button class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-primary" (click)="delete()">
+        Delete
+      </button>
     </form>
   </div>
   <!-- card -->
