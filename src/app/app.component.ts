@@ -14,12 +14,17 @@ export class AppComponent {
     private authService: AuthService,
     private userService: UserService
   ) {
+    console.log('==============>>>>>>>>>  app.component');
     this.authService.user$.subscribe((user) => {
-      if (user) {
-        this.userService.save(user);
-        let returnUrl = localStorage.getItem('returnUrl');
-        this.router.navigateByUrl(returnUrl as UrlTree | string);
-      }
+      if (!user) return;
+
+      this.userService.save(user);
+      let returnUrl = localStorage.getItem('returnUrl');
+
+      if (!returnUrl) return;
+
+      localStorage.removeItem('returnUrl');
+      this.router.navigateByUrl(returnUrl as UrlTree | string);
     });
   }
 }

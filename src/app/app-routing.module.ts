@@ -1,26 +1,22 @@
 import { NgModule } from '@angular/core';
-import { FormControlName } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ProductsComponent } from './products/products.component';
 import { AdminAuthGuard } from './services/admin-guard.service';
 import { AuthGaurd } from './services/authguard.service';
 
 const routes: Routes = [
-  // {
-  //   path: 'navbar',
-  //   loadChildren: () =>
-  //     import('./navbar/navbar.module').then((m) => m.NavbarModule),
-  // },
   {
     path: '',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    component: ProductsComponent,
+    // loadChildren: () =>
+    //   import('./products/products.module').then((m) => m.ProductsModule),
   },
   {
     path: 'products',
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
   },
+
   {
     path: 'login',
     loadChildren: () =>
@@ -88,6 +84,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGaurd, AdminAuthGuard],
   },
+  // product-cart module
 
   {
     path: '**',

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { take } from 'rxjs/operators';
 import { pipe } from 'rxjs';
+import { ProductList, Products } from 'src/app/models/product-list';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-form',
@@ -13,8 +15,10 @@ import { pipe } from 'rxjs';
 })
 export class ProductFormComponent implements OnInit {
   categories$: any;
-  product: any;
+  product!: any;
   key: any;
+
+  @ViewChild('form', { read: NgForm }) form: HTMLElement | undefined;
 
   constructor(
     private categoryService: CategoryService,
@@ -37,16 +41,15 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getAll();
     this.key = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.key) {
       this.productService
         .get(this.key)
         .pipe(take(1))
         .subscribe((list) => {
-          console.log(list);
           this.product = list;
         });
-    }
+    } else this.product = [];
   }
 }
