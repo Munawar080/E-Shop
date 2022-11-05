@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { mapToStyles } from '@popperjs/core/lib/modifiers/computeStyles';
+import { map, pipe, switchMap } from 'rxjs';
 import { ProductList, Products } from '../models/product-list';
 import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnDestroy, OnInit {
   categories$: any;
   filteredCategories$: Products[] = [];
   category: string = '';
+  cart!: any;
   constructor(
     private productService: ProductService,
     private categoriesServices: CategoryService,
@@ -55,10 +57,26 @@ export class ProductsComponent implements OnDestroy, OnInit {
             )
           : this.products$;
       });
+
+    this.cartService.getCart().then((res) => {
+      console.log('getCart =====>', res);
+      res.snapshotChanges().subscribe(
+        pipe((r: any) => {
+          this.cart = r.payload.val();
+        })
+      );
+    });
   }
 
   addToCart(product: Products) {
     this.cartService.addToCart(product);
+  }
+
+  getCart() {
+    return this.cartService.getCart().then((cart) => {
+      this.cart = cart;
+      console.log(cart);
+    });
   }
   ngOnDestroy(): void {}
 }

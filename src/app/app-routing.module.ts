@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ProductCartComponent } from './product-cart/product-cart.component';
 import { ProductsComponent } from './products/products.component';
 import { AdminAuthGuard } from './services/admin-guard.service';
 import { AuthGaurd } from './services/authguard.service';
@@ -11,10 +12,20 @@ const routes: Routes = [
     // loadChildren: () =>
     //   import('./products/products.module').then((m) => m.ProductsModule),
   },
+
   {
     path: 'products',
-    loadChildren: () =>
-      import('./products/products.module').then((m) => m.ProductsModule),
+    component: ProductsComponent,
+    // loadChildren: () =>
+    //   import('./products/products.module').then((m) => m.ProductsModule),
+  },
+  {
+    path: 'product-cart',
+    component: ProductCartComponent,
+    // loadChildren: () =>
+    //   import('./product-cart/product-cart.module').then(
+    //     (m) => m.ProductCartModule
+    //   ),
   },
 
   {
@@ -84,6 +95,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGaurd, AdminAuthGuard],
   },
+
   // product-cart module
 
   {
@@ -93,7 +105,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      // preloading strategy improve your UX experience loading part of your app in the background
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
