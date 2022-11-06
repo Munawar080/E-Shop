@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
     });
 
     // shoppingcarts
+    console.log('hello world');
   }
   logout() {
     this.authService.logout();
