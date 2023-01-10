@@ -19,8 +19,9 @@ export class ProductCartComponent {
     this.cartServices.removeFromCart(this.product);
   }
   getQuantity() {
-    if (!this.shoppingCart) return 0; // protect from null value
-    let item = this.shoppingCart.items[this.product.key];
-    return item ? item.quantity : 0;
+    return 0;
+    // if (!this.shoppingCart) return 0; // protect from null value
+    // let item = this.shoppingCart.items[this.product.key];
+    // return item ? item.quantity : 0;
   }
 }
